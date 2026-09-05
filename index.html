@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>GATE Command Center · Gaurav Tiwari</title>
+<title>GATE Command Center · Shubham Singh</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -530,7 +530,7 @@ button.pill:hover{border-color:var(--border-2);background:var(--sunken)}
     </div>
     <span class="divider"></span>
     <div class="who">
-      <b id="whoName">Gaurav Tiwari</b>
+      <b id="whoName">Shubham Singh</b>
       <span id="whoExam">GATE CSE 2027</span>
     </div>
     <div class="tb-right" id="tbRight"></div>
@@ -547,7 +547,7 @@ button.pill:hover{border-color:var(--border-2);background:var(--sunken)}
 
 <script>
 /* ══════════════════════════════════════════════════════════════
-   GATE COMMAND CENTER · Gaurav Tiwari · GATE CSE 2027
+   GATE COMMAND CENTER · Shubham Singh · GATE CSE 2027
    Single file. All progress persists in localStorage.
    ══════════════════════════════════════════════════════════════ */
 (function () {
@@ -778,7 +778,7 @@ var KEY = 'gate_cc_v1', BAK = 'gate_cc_v1_backup';
 function blankState() {
   return {
     v: 1,
-    pf: { name:'Gaurav Tiwari', exam:'GATE CSE 2027', date:'2027-02-07' },
+    pf: { name:'Shubham Singh', exam:'GATE CSE 2027', date:'2027-02-07' },
     ch: {}, subs: {}, notes: {}, rev: {}, pp: {}, act: {},
     doneAt: {},                     /* chapId -> YYYY-MM-DD it was first fully completed */
     tm: { totals:{}, subj:'' },
@@ -1020,7 +1020,7 @@ function renderNav() {
       '<b class="num">' + (d === null ? '—' : Math.max(0, d)) + '</b>&nbsp;days left</span>' +
     '<span class="avatar" title="' + esc(S.pf.name) + '">' + esc(initials) + '</span>';
 
-  el('whoName').textContent = S.pf.name || 'Gaurav Tiwari';
+  el('whoName').textContent = S.pf.name || 'Shubham Singh';
   el('whoExam').textContent = S.pf.exam || 'GATE CSE 2027';
 }
 function daysLeft() { if (!S.pf.date) return null; try { return dayDiff(today(), S.pf.date); } catch (e) { return null; } }
@@ -1177,7 +1177,7 @@ function heat() {
 function foot() {
   return '<div style="margin-top:var(--s8);padding-top:var(--s4);border-top:1px solid var(--border);' +
     'display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)">' +
-    '<span>' + esc(S.pf.name || 'Gaurav Tiwari') + ' · ' + esc(S.pf.exam || 'GATE CSE 2027') + '</span>' +
+    '<span>' + esc(S.pf.name || 'Shubham Singh') + ' · ' + esc(S.pf.exam || 'GATE CSE 2027') + '</span>' +
     '<span style="margin-left:auto" class="num">' + TOTAL_CH + ' chapters · ' + TOTAL_QS.toLocaleString('en-IN') + ' PYQs</span></div>';
 }
 
@@ -1734,7 +1734,7 @@ document.addEventListener('click', function (e) {
   }
 
   if (t.closest('#setSave')) {
-    S.pf.name = el('setName').value.trim() || 'Gaurav Tiwari';
+    S.pf.name = el('setName').value.trim() || 'Shubham Singh';
     S.pf.exam = el('setExam').value.trim() || 'GATE CSE 2027';
     S.pf.date = el('setDate').value;
     save(true); renderNav(); render(); toast('Profile saved', 'ok'); return;
