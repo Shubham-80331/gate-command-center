@@ -48,6 +48,37 @@
   --font:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
 }
 
+/* ─────────── Dark theme ─────────── */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0D1117; --card:#151A21; --sunken:#1C232D; --border:#293241; --border-2:#3A4555;
+  --ink:#F2F4F8; --ink-2:#C6CDD8; --muted:#98A3B3; --faint:#687487;
+  --blue:#5B8CFF; --blue-ink:#82A7FF; --blue-soft:#182A4A;
+  --green:#35C76F; --green-ink:#69D99A; --green-soft:#123321;
+  --amber:#F5B84B; --amber-ink:#FFD083; --amber-soft:#382A14;
+  --indigo:#818CF8; --indigo-ink:#A5ACFF; --indigo-soft:#242544;
+  --red:#F06A70; --red-ink:#FF9A9F; --red-soft:#3A1D21;
+  --teal:#2CC7B8; --teal-ink:#6DE1D6; --teal-soft:#12302D;
+  --sh-card:0 1px 2px rgba(0,0,0,.28);
+  --sh-lift:0 14px 30px -8px rgba(0,0,0,.48),0 5px 10px -5px rgba(0,0,0,.30);
+  --sh-pop:0 18px 45px -10px rgba(0,0,0,.62);
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb{background:#3A4555;border-color:var(--bg)}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background:#4B586A}
+html[data-theme="dark"] .subj-h:hover, html[data-theme="dark"] .tk:hover, html[data-theme="dark"] .rev:hover{background:#1A2029}
+html[data-theme="dark"] .chaps{background:#11161D}
+html[data-theme="dark"] .paper.done{border-color:#245D3C}
+html[data-theme="dark"] .btn-d{border-color:#71373B}
+html[data-theme="dark"] .btn-s:hover{border-color:#4A5668}
+html[data-theme="dark"] .tk[data-s="progress"]{border-color:#70561F}
+html[data-theme="dark"] .tk[data-s="done"]{border-color:#27613F}
+html[data-theme="dark"] .subj[style], html[data-theme="dark"] .card[style]{--c-soft:color-mix(in srgb,var(--c) 16%,var(--card)) !important;--c-ink:color-mix(in srgb,var(--c) 48%,white) !important}
+html[data-theme="dark"] .hc[data-l="1"]{background:#243A63}
+html[data-theme="dark"] .hc[data-l="2"]{background:#345B9D}
+html[data-theme="dark"] .hc[data-l="3"]{background:#4777C7}
+html[data-theme="dark"] .mbg{background:rgba(0,0,0,.62)}
+html[data-theme="dark"] ::selection{background:#294A85;color:#fff}
+
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -56,6 +87,7 @@ body{
   color:var(--ink); background:var(--bg);
   min-height:100vh; overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
+  transition:background-color var(--t2) var(--e),color var(--t2) var(--e);
 }
 h1,h2,h3,h4,h5{margin:0; font-weight:600; letter-spacing:-.011em; color:var(--ink)}
 p{margin:0}
@@ -94,6 +126,9 @@ ul{margin:0;padding:0;list-style:none}
 .who span{font-size:11.5px;color:var(--muted);white-space:nowrap}
 
 .tb-right{margin-left:auto;display:flex;align-items:center;gap:var(--s2)}
+.theme-btn{width:32px;height:32px;border:1px solid var(--border);border-radius:var(--r);background:var(--card);color:var(--muted);display:grid;place-items:center;transition:all var(--t) var(--e)}
+.theme-btn:hover{color:var(--ink);background:var(--sunken);border-color:var(--border-2)}
+.theme-btn svg{width:15px;height:15px;stroke-width:2}
 
 .pill{
   display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 11px;border-radius:var(--r);
@@ -598,7 +633,9 @@ var P = {
   clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   more:'<circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/>',
   user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
-  chip:'<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M4 10H2M4 14H2M22 10h-2M22 14h-2M10 4V2M14 4V2M10 22v-2M14 22v-2"/>'
+  chip:'<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M4 10H2M4 14H2M22 10h-2M22 14h-2M10 4V2M14 4V2M10 22v-2M14 22v-2"/>',
+  moon:'<path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2z"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/>'
 };
 function ic(n, cls) {
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"' +
@@ -782,7 +819,7 @@ function blankState() {
     ch: {}, subs: {}, notes: {}, rev: {}, pp: {}, act: {},
     doneAt: {},                     /* chapId -> YYYY-MM-DD it was first fully completed */
     tm: { totals:{}, subj:'' },
-    ui: { open:{}, view:'dash' }
+    ui: { open:{}, view:'dash', theme:'light' }
   };
 }
 var S = blankState();
@@ -797,6 +834,8 @@ function load() {
       for (var pk in b.pf) if (!(pk in o.pf)) o.pf[pk] = b.pf[pk];
       if (!o.ui) o.ui = b.ui;
       if (!o.ui.open) o.ui.open = {};
+      if (!o.ui.theme) o.ui.theme = b.ui.theme;
+      if (o.ui.theme !== 'dark' && o.ui.theme !== 'light') o.ui.theme = 'light';
       if (!o.tm) o.tm = b.tm;
       if (!o.tm.totals) o.tm.totals = {};
       if (!o.doneAt) o.doneAt = {};
@@ -1012,6 +1051,7 @@ function renderNav() {
 
   var d = daysLeft(), initials = (S.pf.name || 'G T').trim().split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
   el('tbRight').innerHTML =
+    '<button class="theme-btn" id="themeToggle" type="button" title="Switch to ' + (S.ui.theme === 'dark' ? 'light' : 'dark') + ' mode" aria-label="Switch to ' + (S.ui.theme === 'dark' ? 'light' : 'dark') + ' mode">' + ic(S.ui.theme === 'dark' ? 'sun' : 'moon') + '</button>' +
     '<button class="pill' + (T.running ? ' on' : '') + '" id="timerPill" type="button" title="Study timer">' +
       (T.running ? '<span class="live-dot"></span>' : ic('timer')) +
       '<b class="num" id="pillTime">' + (T.running ? mmss(T.left) : fmtMin(minsToday())) + '</b></button>' +
@@ -1024,6 +1064,18 @@ function renderNav() {
   el('whoExam').textContent = S.pf.exam || 'GATE CSE 2027';
 }
 function daysLeft() { if (!S.pf.date) return null; try { return dayDiff(today(), S.pf.date); } catch (e) { return null; } }
+
+function applyTheme(theme) {
+  var t = theme === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', t);
+  document.documentElement.style.colorScheme = t;
+}
+function toggleTheme() {
+  S.ui.theme = S.ui.theme === 'dark' ? 'light' : 'dark';
+  applyTheme(S.ui.theme);
+  save(true);
+  renderNav();
+}
 
 function go(v) {
   view = v; S.ui.view = v; save();
@@ -1633,6 +1685,7 @@ function cycle(btn) {
 
 /* ═══════════════ Events ═══════════════ */
 document.addEventListener('click', function (e) {
+  if (e.target.closest && e.target.closest('#themeToggle')) { toggleTheme(); return; }
   var t = e.target, n;
 
   if ((n = t.closest('[data-go]'))) { go(n.getAttribute('data-go')); return; }
@@ -1873,6 +1926,7 @@ function doImport(file) {
 
 /* ═══════════════ Boot ═══════════════ */
 load();
+applyTheme(S.ui && S.ui.theme ? S.ui.theme : 'light');
 if (S.ui && S.ui.view && RENDER[S.ui.view]) view = S.ui.view;
 renderNav();
 render();
